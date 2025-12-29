@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+
+    Browser->>Server: GET /exampleapp/notes
+    activate Server
+    Server-->>Browser: HTML document
+    deactivate Server

@@ -1,0 +1,39 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+
+    %% Carregamento inicial da SPA
+    Browser->>Server: GET /exampleapp/spa
+    activate Server
+    Server-->>Browser: HTML document (SPA)
+    deactivate Server
+
+    Browser->>Server: GET /exampleapp/main.css
+    activate Server
+    Server-->>Browser: CSS file
+    deactivate Server
+
+    Browser->>Server: GET /exampleapp/spa.js
+    activate Server
+    Server-->>Browser: JavaScript file
+    deactivate Server
+
+    Note right of Browser: O navegador executa o JavaScript da SPA
+
+    %% Busca inicial dos dados
+    Browser->>Server: GET /exampleapp/data.json
+    activate Server
+    Server-->>Browser: JSON com as notas
+    deactivate Server
+
+    Note right of Browser: JavaScript renderiza as notas na página\nsem recarregar o HTML
+
+    %% Envio de nova nota (SPA)
+    Note right of Browser: Utilizador escreve uma nota\ne clica em Submit
+
+    Browser->>Server: POST /exampleapp/new_note_spa (JSON da nova nota)
+    activate Server
+    Server-->>Browser: 201 Created
+    deactivate Server
+
+    Note right of Browser: JavaScript atualiza a lista de notas\nno DOM sem recarregar a página

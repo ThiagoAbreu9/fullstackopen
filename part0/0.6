@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant Browser
+    participant Server
+
+    Note right of Browser: Utilizador escreve uma nova nota no formulário da SPA
+
+    Browser->>Browser: Evento submit é interceptado por JavaScript (preventDefault)
+
+    Browser->>Server: POST /exampleapp/new_note_spa{ content, date }
+    activate Server
+    Server-->>Browser: 201 Created (nota criada)
+    deactivate Server
+
+    Note right of Browser: JavaScript adiciona a nova nota\nà lista existente no DOM\nsem recarregar a página
